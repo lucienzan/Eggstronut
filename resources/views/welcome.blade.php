@@ -21,11 +21,11 @@
 <div class="border-bottom mb-4 pb-4 article-preview">
     <div class="p-0 p-md-3">
         <a class="fw-bold h4 d-block text-decoration-none"
-           href="{{ route('detail',$article->id) }}">
+           href="{{ route('detail',$article->slug) }}">
             {{ $article->title }} </a>
 
         <div class="small post-category">
-            <a href="{{ route('baseOnCategory',$article->category->id) }}" rel="category tag">{{ $article->category->title }}</a>
+            <a href="{{ route('baseOnCategory',$article->category->slug) }}" rel="category tag">{{ $article->category->title }}</a>
         </div>
 
         <div class="my-3 feature-image-box">
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('detail',$article->id) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
+            <a href="{{ route('detail',$article->slug) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
         </div>
     </div>
     </div>
