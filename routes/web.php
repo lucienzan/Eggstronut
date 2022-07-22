@@ -30,12 +30,6 @@ Route::get('/name/{name}',[BlogController::class,'name'])->name('baseOnName');
 Route::get('/date/{date}',[BlogController::class,'date'])->name('baseOnDate');
 
 
-
-
-// Route::get('/dashboard/index',[MainController::class,'index'])->name('dashboard.index');
-// Route::get('/dashboard/create',[MainController::class,'create'])->name('dashboard.create');
-
-
 Route::view('/about','blog.about')->name('about');
 
 Auth::routes();
