@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -133,5 +134,14 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->update();
         return redirect()->back();
+    }
+
+    public function updateInfo(Request $request)
+    {
+       $current_user = User::find(Auth::id());
+       $current_user->phone = $request->phone;
+       $current_user->address = $request->address;
+       $current_user->save();
+    return redirect()->back();
     }
 }

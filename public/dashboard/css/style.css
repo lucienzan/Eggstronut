@@ -14,7 +14,7 @@
 .header{
     position: sticky;
     top: 0.13rem;
-    z-index: 2000;
+    z-index: 3;
 }
 .aside{
     overflow: scroll;
@@ -83,7 +83,7 @@
 @media screen and (max-width:780px){
     .aside{
     position: fixed;
-    z-index: 2100;
+    z-index: 3;
     width: 300px;
     background-color: var(--white);
     display: block !important;

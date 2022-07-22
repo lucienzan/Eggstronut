@@ -42,8 +42,19 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js"></script> -->
 
 <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
-</body>
-<script>
+@auth
 
+@empty(Auth::user()->phone)
+@include("user-profile.user-info")
+@endempty
+
+@if (session('toast'))
+<script>
+  let toastinfo = @json(session('toast'));
+  showToast(toastinfo.icon,toastinfo.title)
 </script>
+@endif
+
+@endauth
+</body>
 </html>

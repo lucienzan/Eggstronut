@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Padauk:wght@400;700&display=swap');
 // Variables
 @import 'variables';
-
+//sweetalert
+@import "../../node_modules/sweetalert2/src/sweetalert2.scss";
+//fontawesome
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

@@ -60,7 +60,7 @@ class ArticleController extends Controller
         $article->category_id = $request->category;
         $article->user_id = Auth::id();
         $article->save();
-        return redirect()->back();
+        return redirect()->back()->with('toast',["icon"=>"success","title"=>"New article is added"]);
     }
 
     /**
@@ -103,7 +103,7 @@ class ArticleController extends Controller
         $article->category_id  = $request->category;
         $article->user_id = Auth::id();
         $article->update();
-        return to_route('article.index');
+        return to_route('article.index')->with('toast',["icon"=>"success","title"=>"Current article is updated"]);
     }
 
     /**
@@ -115,6 +115,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect()->route("article.index",["page"=>request()->page]);
+        return redirect()->route("article.index",["page"=>request()->page])->with('toast',["icon"=>"success","title"=>"Current article is deleted"]);
     }
 }

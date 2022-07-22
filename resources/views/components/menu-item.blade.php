@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="{{ $link }}" class="nav-item-link">
+    <a href="{{ $link }}" class="nav-item-link" data-bs-toggle="{{ $modal }}" data-bs-target="{{ $target }}">
         <span>
             <i class="{{ $class }}"></i>
             {{ $name }}

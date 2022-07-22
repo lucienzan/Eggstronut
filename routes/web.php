@@ -46,7 +46,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::post('/password/update-password/', [UserController::class,'updatePassword'])->name('user.updatePassword');
     Route::post('/name/update-name', [UserController::class,'updateName'])->name('user.updateName');
     Route::put('/email/update-email/{id}', [UserController::class,'updateEmail'])->name('user.updateEmail');
-    
+    Route::post('/update-user-info',[UserController::class,'updateInfo'])->name('profile.update.info');
     });
 });
 
