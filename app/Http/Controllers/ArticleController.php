@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -16,6 +17,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        // $all = Article::all();
+        // foreach($all as $a){
+        //     $a->slug = Str::slug($a->title)."-".uniqid();
+        //     $a->update();
+        // }
         $articles = Article::when(request('keyword'),function($q){
             $keyword = request('keyword');
             $q->where("title","like","%$keyword%")
@@ -49,6 +55,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->description = $request->description;
+        $article->slug = Str::slug($article->title)."-".uniqid();
         $article->category_id = $request->category;
         $article->user_id = Auth::id();
         $article->save();
@@ -86,6 +93,9 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
+        if($article->title != $request->title){
+        $article->slug = Str::slug($article->title)."-".uniqid();
+        }
         $article->title = $request->title;
         $article->description = $request->description;
         $article->category_id  = $request->category;

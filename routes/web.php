@@ -24,8 +24,8 @@ use App\Http\Controllers\UserController;
 // })->name('index');
 
 Route::get('/',[BlogController::class,'index'])->name('index');
-Route::get('/detail/id/{id}',[BlogController::class,'detail'])->name('detail');
-Route::get('/category/id/{id}',[BlogController::class,'category'])->name('baseOnCategory');
+Route::get('/detail/{slug}',[BlogController::class,'detail'])->name('detail');
+Route::get('/category/{slug}',[BlogController::class,'category'])->name('baseOnCategory');
 Route::get('/name/{name}',[BlogController::class,'name'])->name('baseOnName');
 Route::get('/date/{date}',[BlogController::class,'date'])->name('baseOnDate');
 

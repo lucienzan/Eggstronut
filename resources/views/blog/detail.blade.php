@@ -7,9 +7,8 @@
 @section('content')
 
 <div class="">
-
    <div class="small post-category mb-3">
-      <a href="{{ route('baseOnCategory',$article->category->id) }}" rel="category tag">{{ $article->category->title }}</a>
+      <a href={{ route('baseOnCategory',$article->category->slug) }} rel="category tag">{{ $article->category->title }}</a>
   </div>
   <h2 class="fw-bolder">{{ $article->title }} </h2>
   <div class="my-3 feature-image-box">
@@ -41,15 +40,14 @@
 
 
 @php
-
+   $first = Article::where('id',"<",$article->id)->first();
+   $last = Article::all()->last();
    $previousBtn = Article::where('id',"<",$article->id)->latest('id')->first();
    $nextBtn = Article::where('id',">",$article->id)->first();
-
 @endphp
-{{ date('d-m-Y',strtotime('1658392200')) }}
 
 <div class="nav d-flex justify-content-between p-3">
-   <a href="{{ route('detail',$previousBtn->id ?? "200") }}"
+   <a href="{{ route('detail',$previousBtn->slug ?? $last->slug) }}"
       class="btn btn-outline-primary page-mover rounded-circle">
        <i class="fas fa-chevron-left"></i>
    </a>
@@ -58,7 +56,7 @@
        Read All
    </a>
 
-   <a href="{{ route('detail',$nextBtn->id ?? "1") }}"
+   <a href="{{ route('detail',$nextBtn->slug ?? $first->slug ) }}"
       class="btn btn-outline-primary page-mover rounded-circle">
        <i class="fas fa-chevron-right"></i>
    </a>
