@@ -93,6 +93,9 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
+        if($article->title != $request->title){
+        $article->slug = Str::slug($article->title)."-".uniqid();
+        }
         $article->title = $request->title;
         $article->description = $request->description;
         $article->category_id  = $request->category;
