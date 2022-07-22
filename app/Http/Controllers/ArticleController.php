@@ -19,7 +19,7 @@ class ArticleController extends Controller
     {
         // $all = Article::all();
         // foreach($all as $a){
-        //     $a->slug = Str::slug($a->title)."-".uniqid();
+        //     $a->excerpt = Str::words($a->description,50);
         //     $a->update();
         // }
         $articles = Article::when(request('keyword'),function($q){
@@ -55,6 +55,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
         $article->slug = Str::slug($article->title)."-".uniqid();
         $article->category_id = $request->category;
         $article->user_id = Auth::id();
@@ -98,6 +99,7 @@ class ArticleController extends Controller
         }
         $article->title = $request->title;
         $article->description = $request->description;
+        $article->excerpt = Str::words($request->description,50);
         $article->category_id  = $request->category;
         $article->user_id = Auth::id();
         $article->update();
