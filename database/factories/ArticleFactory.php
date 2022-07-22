@@ -20,10 +20,12 @@ class ArticleFactory extends Factory
     public function definition()
     {
         $title = $this->faker->sentence();
+        $paragraph = $this->faker->realText(1500);
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'description' =>fake()->realText(800),
+            'excerpt' => Str::words($paragraph,50),
+            'description' => $paragraph,
             'category_id' => Category::inRandomOrder()->first()->id,
             'user_id'=>User::inRandomOrder()->first()->id,
         ];
