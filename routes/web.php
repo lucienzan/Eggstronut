@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,15 +33,21 @@ Route::get('/date/{date}',[BlogController::class,'date'])->name('baseOnDate');
 
 Route::view('/about','blog.about')->name('about');
 
+
 Auth::routes();
 
-Route::prefix('dashboard')->middleware('auth')->group(function(){
+Route::prefix('dashboard')->middleware(['auth','isBanned'])->group(function(){
+    
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/category',CategoryController::class);
     Route::resource('/article',ArticleController::class);
 
 
     Route::prefix('profile')->group(function(){
+    Route::get('/user-manage',[UserManageController::class,'index'])->name('user.manage');
+    Route::post('/user-manage/change-role',[UserManageController::class,'changeRole'])->name('user-manage.role');
+    Route::post('/user-manage/ban-role',[UserManageController::class,'banRole'])->name('user-manage.ban-role');
+
     Route::resource('/user', UserController::class);
     Route::get('/password', [UserController::class,'changePassword'])->name('user.changePassword');
     Route::post('/password/update-password/', [UserController::class,'updatePassword'])->name('user.updatePassword');

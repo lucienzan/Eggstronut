@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('profile')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
+            $table->enum('role',['0','1'])->default('1');
+            $table->enum('isBanned',['0','1'])->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

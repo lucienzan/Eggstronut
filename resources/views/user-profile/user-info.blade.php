@@ -40,11 +40,11 @@
 <script>
   
 const modal = new bootstrap.Modal('#updateUserInfo')
-modal.show()
+// modal.show()
 
-setInterval(() => {
-  const modal = new bootstrap.Modal('#updateUserInfo');
-  modal.show();
-}, 3000);
+// setInterval(() => {
+//   const modal = new bootstrap.Modal('#updateUserInfo');
+//   modal.show();
+// }, 3000);
 
 </script>

@@ -51,10 +51,16 @@
 @if (session('toast'))
 <script>
   let toastinfo = @json(session('toast'));
-  showToast(toastinfo.icon,toastinfo.title)
+  showToast(toastinfo.icon,toastinfo.title);
 </script>
 @endif
 
 @endauth
+@if (session('banStatus'))
+    <script>
+        let baninfo = @json(session('banStatus'));
+        showBanInfo(baninfo.icon,baninfo.title);
+    </script>
+@endif
 </body>
 </html>

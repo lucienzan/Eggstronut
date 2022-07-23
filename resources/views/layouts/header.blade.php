@@ -37,6 +37,15 @@
                     </button>
                 </div>
             </form>
+            @elseif (request()->path() == "dashboard/profile/user-manage")
+            <form action="{{ route('user.manage') }}" method="get" class="d-none d-lg-inline" style="margin-block: auto;">
+                <div class="form d-flex">
+                    <input type="text" class="form-control" name="keyword" value="{{ old('keyword',request('keyword')) }}"  id="">
+                    <button class="btn btn-light btn-search">
+                        <i class="feather-search"></i>
+                    </button>
+                </div>
+            </form>
             @endif
             <div class="dropdown dropbox">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">

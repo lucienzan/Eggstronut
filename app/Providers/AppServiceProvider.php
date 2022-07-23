@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +33,8 @@ class AppServiceProvider extends ServiceProvider
         View::share('categoriesAll', Category::latest('id')->with(['user'])->get());
         View::share('articlesAll', Article::latest('id')->with(['user','category'])->get());
 
+        Blade::if('isAdmin',function(){
+            return Auth::user()->role === "0";
+        });
     }
 }

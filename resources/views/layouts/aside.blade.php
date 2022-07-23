@@ -51,6 +51,12 @@
             <x-menu-item link="{{ route('article.index') }}" class="feather-file-text" counter="{{ $articlesAll->count() }}" name="Articles" ></x-menu-item>
             <x-menu-spacer></x-menu-spacer>
 
+            @isAdmin()
+            <x-menu-title title="User Management"></x-menu-title>
+            <x-menu-item link="{{ route('user.manage') }}" class="feather-users" name="User Lists" ></x-menu-item>
+            <x-menu-spacer></x-menu-spacer>
+            @endisAdmin
+
             <x-menu-title title="Personal Information"></x-menu-title>
             <x-menu-item link="{{ route('user.show',Auth::id()) }}" class="feather-user" name="Profile" ></x-menu-item>
             <x-menu-item link="{{ route('user.changePassword' ) }}" class="feather-lock" name="Update Password"></x-menu-item>
