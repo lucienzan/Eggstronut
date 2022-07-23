@@ -47,7 +47,7 @@ window.showConfirmRole = function(id){
           )
           setTimeout(function(){
             $("#form"+id).submit();
-          },2000)
+          },1000)
         }
       })
 }
@@ -69,7 +69,7 @@ window.banConfirmRole = function(id){
           )
           setTimeout(function(){
             $("#banForm"+id).submit();
-          },2000)
+          },1000)
         }
       })
 }
@@ -92,7 +92,7 @@ window.unbanConfirmRole = function(id)
           )
           setTimeout(function(){
             $("#unbanForm"+id).submit();
-          },2000)
+          },1000)
         }
       })
 }
