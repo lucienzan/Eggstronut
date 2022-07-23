@@ -3,6 +3,14 @@
     User Management
 @endsection
 
+@section('head')
+    <style>
+        tbody tr{
+            vertical-align: middle;
+        }
+    </style>
+@endsection
+
 @section('content')
 <x-bread-crumb>
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
@@ -45,7 +53,7 @@
                                                 Admin
                                             </button>
                                         </form>
-
+                                        
                                         @if ($user->isBanned == "0")
                                         <form action="{{ route('user-manage.ban-role') }}" id="banForm{{ $user->id }}" method="post" class="d-inline-block">
                                             @csrf
@@ -54,7 +62,9 @@
                                                 Ban
                                             </button>
                                         </form>
+
                                         @elseif ($user->isBanned == "1")  
+
                                         <form action="{{ route('user-manage.ban-role') }}" id="unbanForm{{ $user->id }}" method="post" class="d-inline-block">
                                             @csrf
                                             <input type="hidden" value="{{ $user->id }}" name="id">
@@ -63,6 +73,8 @@
                                             </button>
                                         </form>
                                         @endif
+
+                                        <button class="btn btn-outline-secondary" onclick="changePw({{ $user->id }},'{{ $user->name }}')">Change Password</button>
 
                                         @elseif ($user->role === "0")
 
@@ -96,7 +108,6 @@
         </div>
     </div>
 </div>
-
 {{-- @php
 $name = $user->name;
 @endphp
@@ -104,6 +115,9 @@ let name = <?php echo json_encode($name) ?>; --}}
 
 @endsection
 <script src="{{ asset('js/blog.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script> 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     function showConfirm(id){
     showConfirmRole(id);       
@@ -113,5 +127,40 @@ let name = <?php echo json_encode($name) ?>; --}}
     }
     function unbanConfirm(id){
     unbanConfirmRole(id);
+    }
+    function changePw(id,name){
+    let url = "{{ route('user-manage.change-password') }}";
+    Swal.fire({
+        title: "Do you want to change password for "+name+" ?",
+        input: 'password',
+        inputAttributes: {
+          autocapitalize: 'off',
+          required: "required",
+          minLength: 8,
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Change',
+        showLoaderOnConfirm: true,
+        preConfirm: function (newPassword){
+            $.post(url,{
+                id : id,
+                newPassword : newPassword,
+                _token: "{{ csrf_token() }}" ,
+            }).done(function(data){
+                if(data.status == 200){
+                    Swal.fire({
+                        icon : "success",
+                        title : "Password changed!",
+                        text: data.message,
+                    });
+                }else{
+                    Swal.fire({
+                        icon : "error",
+                        text: data.message.password[0],
+                    });
+                }
+            })
+        }
+      })
     }
 </script>

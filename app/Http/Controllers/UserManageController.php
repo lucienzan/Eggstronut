@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserManageController extends Controller
 {
@@ -69,9 +71,20 @@ class UserManageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function changePassword(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(),[
+          "newPassword" => "required|min:8",  
+        ]); //use this when you passed the data with ajax
+        if($validate->fails()){
+            return response()->json(["status"=>422,"message"=>$validate->errors()]);
+        }
+        $current_user = User::find($request->id);
+        if($current_user->role == "1"){
+            $current_user->password = Hash::make($request->newPassword);
+            $current_user->update();
+        }
+        return response()->json(["status"=>200,"message"=>"Password is successfully changed."]);
     }
 
     /**

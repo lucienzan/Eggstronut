@@ -1,5 +1,6 @@
 // import './bootstrap';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+window.$ = require('jquery');
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 $(".show-btn").click(function(){
@@ -108,3 +109,30 @@ window.showBanInfo = function(icon,title){
         cancelButtonText: 'Ok',
       })
 }
+
+// window.changeUserPw = function (id,name,token)
+// {
+//     console.log(token);
+//     let locate = "http://127.0.0.1:8000/dashboard/profile/user-manage/change-password";
+//     Swal.fire({
+//         title: 'Do you want to change password for'+name+" ?",
+//         input: 'password',
+//         inputAttributes: {
+//           autocapitalize: 'off',
+//           required: "required",
+//           minLength: 8,
+//         },
+//         showCancelButton: true,
+//         confirmButtonText: 'Change',
+//         showLoaderOnConfirm: true,
+//         preConfirm: function (newPassword){
+//             $.post(locate,{
+//                 id : id,
+//                 newPassword : newPassword,
+//                 _token: "EkKEvIfdXtFM8fFNWM213IiDlzOY0TPGKq2cZYsx",
+//             }).done(function(data){
+//                 console.log(data);
+//             })
+//         }
+//       })
+// }
